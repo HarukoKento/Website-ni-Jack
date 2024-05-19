@@ -21,6 +21,30 @@
             text-align: center;
             flex-direction: column;
         }
+        .menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .menu li {
+            padding: 0 20px;
+        }
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
         h1 {
             color: white;
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -29,7 +53,7 @@
         }
         .plate-option {
             display: inline-block;
-            margin: 10px;
+            margin: 200px 200px; 
             cursor: pointer;
             color: white;
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -38,22 +62,57 @@
             display: block;
             max-width: 100%;
             height: auto;
+            transition: transform 0.5s ease; 
+        }
+        #image-container img.active {
+            transform: scale(1.1); 
+        }
+        .shape-circle {
+            width: 100px;
+            height: 100px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .shape-rectangle {
+            width: 150px;
+            height: 100px;
+            background-color: #00FF00;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
         }
     </style>
 </head>
 <body>
+    <div class="menu">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    <div class="shape-circle"></div>
+    <div class="shape-rectangle"></div>
     <div>
         <h1>Choose Your Dinner:</h1>
-        <div class="plate-option" onclick="showImage('img/plate.jpg')">Dinner Plate 1</div>
-        <div class="plate-option" onclick="showImage('img/plate.jpg')">Dinner Plate 2</div>
+        <div class="plate-option" onclick="showImage('img/plate.jpg', this)">Dinner Plate 1</div>
+        <div class="plate-option" onclick="showImage('img/plate.jpg', this)">Dinner Plate 2</div>
     </div>
 
     <div id="image-container"></div>
 
     <script>
-    function showImage(imageFileName) {
+    function showImage(imageFileName, element) {
+        document.querySelectorAll('.plate-option').forEach(function(el) {
+            el.classList.remove('active');
+        });
+        element.classList.add('active');
         const imageContainer = document.getElementById('image-container');
-        imageContainer.innerHTML = '<img src="' + imageFileName + '" alt="Selected Plate">';
+        imageContainer.innerHTML = '<img src="' + imageFileName + '" alt="Selected Plate" class="active">';
     }
     </script>
 </body>
